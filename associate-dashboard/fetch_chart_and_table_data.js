@@ -24,10 +24,10 @@ function build_row(i, row){
 }
 
 function get_table(){
-	let port = 5000
-	let host = "https://localhost"
-	let endpoint = "/test/"
-	let url = host + ':' + port
+	let port = 5000;
+	let host = "https://localhost";
+	let endpoint = "/test/"; //TODO select endpoint for associate dashboard data
+	let url = host + ':' + port + endpoint;
 	fetch(url, {
 		method: 'GET',
 		mode: 'cors',
@@ -39,11 +39,47 @@ function get_table(){
 		console.log('mistakes were made:')
 		console.log(err)
 	}).then(response_dict =>{
+/*
+{
+  "data": {
+    [
+      aColumn : [
+        avalue0,
+        avalue1,
+        avalue2
+      ],
+      bColumn : [
+        bvalue0,
+        bvalue1,
+        bvalue2
+      ],
+      cColumn : [...],
+      dColumn : [...],
+      eColumn : [...],
+      fColumn : [...]
+    ]
+  },
+  "chartData": {
+  legend0: [
+    Y0,
+    Y0 + (0.33 * (Y3 - Y0)),
+    Y0 + (0.66 * (Y3 - Y0)),
+    Y3,
+    Y4,
+    Y4 + (0.5 * (Y6 - Y4)),
+    Y6
+  ],
+  legend1: [...],
+  legend2: [...]
+  }
+}
+*/
 		console.log('final step:')
 		console.log(response_dict)
 		console.log(typeof(response_dict))
-	if (typeof(response_dict) != 'string'){
+	if (typeof(response_dict) != 'undefined'){
 		//TODO change this to array version of forEach if necessary
+		//call graphIt(response_dict["chartData"]);)
 		Object.keys(response_dict).forEach(x=>{
 			build_row(x, response_dict[x])
 		})
