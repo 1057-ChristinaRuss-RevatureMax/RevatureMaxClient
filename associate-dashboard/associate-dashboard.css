@@ -158,3 +158,13 @@ header {
   
       color: #6890fc;
     }
+
+table {
+	background: #FFFFFF;
+	border: solid .5em #F26925;
+}
+
+td {
+	border: solid .1em #F26925;
+}
+
