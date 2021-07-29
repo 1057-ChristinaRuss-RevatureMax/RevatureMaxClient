@@ -5,22 +5,33 @@
 <td>Batch Average Score</td>
 */
 
-function build_row(i, row){
-	let tbody = document.getElementById("stat_table");
-	let tr = document.createElement("tr");
-	tr.id = "row"+i;
-	//TODO make sure these strings match the endpoint
-	[
-		"label",
-		"date",
-		"score",
-		"batchAverage"
-	].forEach(key=>{
+function build_table(data){
+	let thead_row = document.getElementById("stat_table_head");
+	let columns = [];
+	Object.keys(data).forEach(x=>{
+		// use keys as column header names! fun!
 		let td = document.createElement("td")
-		td.textContent = row[key]
-		tr.appendChild(td)
+		td.textContent = x; //TODO maybe? make a dictionary that points from these names to names we want
+		thead_row.appendChild(td);
+		
+		// pull out columns, we need rows later
+		columns.push(data[x]);
 	});
-	tbody.appendChild(tr);
+
+	//fill in table with "data"
+	let endi = columns[0].length;
+	let endj = columns.length;
+	let tbody = document.getElementById("stat_table");
+	for(i = 0; i < endi; i++){
+		let tr = document.createElement("tr");
+		tr.id = "row"+i;
+		for(j = 0; j < endj; j++){
+			let td = document.createElement("td")
+			td.textContent = columns[j][i] // i & j swapped! we were given columns!
+			tr.appendChild(td)
+		}
+		tbody.appendChild(tr);
+	}
 }
 
 function get_table(){
@@ -77,30 +88,19 @@ function get_table(){
 		console.log('final step:')
 		console.log(response_dict)
 		console.log(typeof(response_dict))
-	if (typeof(response_dict) != 'undefined'){
-		//TODO change this to array version of forEach if necessary
-		//call graphIt(response_dict["chartData"]);)
-		Object.keys(response_dict).forEach(x=>{
-			build_row(x, response_dict[x])
-		})
-	}
+		if (typeof(response_dict) != 'undefined'){
+			graphIt(response_dict["chartData"]);
+			build_table(response_dict["data"]);
+		}
 	})
 }
 
 /* the following is for testing purposes, remove when endpoint is mocked/ready... */
-dict = {
-	1:{
-		"label": "such a label1"
-		, "date": "such a date1"
-		, "score": "such a score1"
-		, "batchAverage": "such an average1"
-	}
-	,2:{
-		"label": "such a label2"
-		, "date": "such a date2"
-		, "score": "such a score2"
-		, "batchAverage": "such an average2"
-	}
-}
-
-Object.keys(dict).forEach( x => { build_row(x, dict[x]) })
+dict = {};
+["label","date","score","batchAverage"].forEach(x=>{
+	dict[x]=[];
+	for(i = 0; i < 10; i++){
+		dict[x].push("such a " + x + " " + i);
+	};
+});
+build_table(dict);
