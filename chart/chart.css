@@ -1,0 +1,27 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+#chart-container{
+    width: 400px;
+
+}
+#chart-legend{
+    display: flex;
+    max-width: min-content;
+    flex-direction: column;
+    
+}
+#chart-legend button{
+    margin: 5px;
+    width: 60px;
+    height: 10px;
+    flex-direction: row;
+    background:none;
+    background-color: red;
+}
+
+.key-item{
+    display: flex;
+}
