@@ -75,27 +75,30 @@ function build_table(data){
 		qcData = get_qc_data()
 		//QC   Week 1    Good   Average
 		let flag = false;
+		var qctr;
 		Object.keys(qcData).forEach(function(key) {
 			if (qcData[key]["week"] == current_week) {
 				flag = true;
-				let tr = document.createElement("tr");
-				console.log("I am inside the outer loop")
+				qctr = document.createElement("tr");
+				//console.log("I am inside the outer loop")
 				Object.keys(qcData[key]).forEach(function(innerkey) {
-					console.log("I am inside the inner loop")
-					let td = document.createElement("td")
-
-					if(qcData[key][innerkey] != "Notes"){
-						console.log("I am inside the if")
-						td.textContent = qcData[key][innerkey]
-						tr.appendChild(td)
+					//console.log("I am inside the inner loop")
+					var qctd = document.createElement("td")
+					console.log(qcData[key][innerkey])
+					if(innerkey !== "Notes"){
+						//console.log("I am inside the if")
+						//console.log(qcData[key][innerkey])
+						//console.log(typeof qcData[key][innerkey])
+						qctd.textContent = qcData[key][innerkey]
+						qctr.appendChild(qctd)
 					}
 				});
 			}
 		  });
 		  if(flag == true){
-			  console.log("Why am I not appending")
+			  //console.log("Why am I not appending")
 			  let tbody = document.getElementById("stat_table");
-			  tbody.appendChild(tr)
+			  tbody.appendChild(qctr)
 		  }
 	}
 }
