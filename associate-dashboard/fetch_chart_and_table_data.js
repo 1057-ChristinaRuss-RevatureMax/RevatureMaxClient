@@ -5,6 +5,39 @@
 <td>Batch Average Score</td>
 */
 
+
+// need to create a function that will take in the QC scores and assign them a weight. Then it will
+// add that data into the table under th respective week they belong
+
+
+
+
+	// "1": {
+	// 	"Average": "Good", 
+	// 	"Notes": "This is a Qc note on week 1", 
+	// 	"Score": "Good", 
+	// 	"Type": "QC"
+	//   }, 
+	//   "2": {
+	// 	"Average": "Average", 
+	// 	"Notes": "This is a Qc note on week 2", 
+	// 	"Score": "Good", 
+	// 	"Type": "QC"
+	//   }, 
+
+
+
+
+function get_qc_data() {
+    // let url = "Zach's QC endpoint";
+	// const response = await fetch(url);
+    // let qcData = await response.json();
+    
+		let qcData = {"1": {"Average": "Good", "Notes": "This is a Qc note on week 1", "Score": "Good", "Type": "QC", "week": "Week 1"}, 
+	  "2": {"Average": "Average", "Notes": "This is a Qc note on week 2", "Score": "Good", "Type": "QC","week": "Week 1"}}
+	  return qcData
+}
+
 function build_table(data){
 	let thead_row = document.getElementById("stat_table_head");
 	let columns = [];
@@ -16,6 +49,7 @@ function build_table(data){
 		
 		// pull out columns, we need rows later
 		columns.push(data[x]);
+		
 	});
 
 	//fill in table with "data"
@@ -25,12 +59,44 @@ function build_table(data){
 	for(i = 0; i < endi; i++){
 		let tr = document.createElement("tr");
 		tr.id = "row"+i;
+		
 		for(j = 0; j < endj; j++){
 			let td = document.createElement("td")
+			
+		
+			var current_week = columns[1][i]
 			td.textContent = columns[j][i] // i & j swapped! we were given columns!
 			tr.appendChild(td)
 		}
 		tbody.appendChild(tr);
+		// This is where we need to append the QC row
+		// Make a call to our function
+
+		qcData = get_qc_data()
+		//QC   Week 1    Good   Average
+		let flag = false;
+		Object.keys(qcData).forEach(function(key) {
+			if (qcData[key]["week"] == current_week) {
+				flag = true;
+				let tr = document.createElement("tr");
+				console.log("I am inside the outer loop")
+				Object.keys(qcData[key]).forEach(function(innerkey) {
+					console.log("I am inside the inner loop")
+					let td = document.createElement("td")
+
+					if(qcData[key][innerkey] != "Notes"){
+						console.log("I am inside the if")
+						td.textContent = qcData[key][innerkey]
+						tr.appendChild(td)
+					}
+				});
+			}
+		  });
+		  if(flag == true){
+			  console.log("Why am I not appending")
+			  let tbody = document.getElementById("stat_table");
+			  tbody.appendChild(tr)
+		  }
 	}
 }
 
@@ -150,9 +216,16 @@ dict = {};
 ["label","date","score","batchAverage"].forEach(x=>{
 	dict[x]=[];
 	for(i = 0; i < 10; i++){
-		dict[x].push("such a " + x + " " + i);
+		if(x != "date"){
+			dict[x].push("such a " + x + " " + i);
+		}
+		else{
+			dict[x].push("Week "+ i);
+		}
 	};
 });
+
+
 build_table(dict);
 
 
