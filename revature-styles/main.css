@@ -40,8 +40,9 @@ reminder:
 }
  
 body{
-	height: 100vh;
-	background: linear-gradient(#FFFFFF, #F26925);
+	/* height: 100vh; */
+	background: linear-gradient(#FFFFFF 20%, #F26925);
+	
 }
 
 * {
