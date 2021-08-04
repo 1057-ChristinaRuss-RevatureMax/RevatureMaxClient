@@ -34,7 +34,7 @@ function get_qc_data() {
     // let qcData = await response.json();
     
 		let qcData = {"1": {"Average": "Good", "Notes": "This is a Qc note on week 1", "Score": "Good", "Type": "QC", "week": "Week 1"}, 
-	  "2": {"Average": "Average", "Notes": "This is a Qc note on week 2", "Score": "Good", "Type": "QC","week": "Week 1"}}
+	  "2": {"Average": "Average", "Notes": "This is a Qc note on week 2", "Score": "Good", "Type": "QC","week": "Week 2"}}
 	  return qcData
 }
 
@@ -84,7 +84,6 @@ function build_table(data){
 				Object.keys(qcData[key]).forEach(function(innerkey) {
 					//console.log("I am inside the inner loop")
 					var qctd = document.createElement("td")
-					console.log(qcData[key][innerkey])
 					if(innerkey !== "Notes"){
 						//console.log("I am inside the if")
 						//console.log(qcData[key][innerkey])
