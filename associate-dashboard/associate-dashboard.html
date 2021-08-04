@@ -43,42 +43,50 @@
             </div>
         </div>
     </header>
-
-    <div class="chart-wrapper">
-        <div style="display: flex; justify-content:left;">
-            
-                <div class="chart-options-container">
-                    <div style="border-bottom: solid 0.1em #fff;">
-                        <div style="padding: 0.1em;">Standing: - - -</div>
+    <div class="center-chart">
+        <div class="chart-wrapper">
+            <div style="display: flex; justify-content:left;">
+                
+                    <div class="chart-options-container">
+                        <div style="border-bottom: solid 0.1em #fff;">
+                            <div style="padding: 0.1em;">Standing: - - -</div>
+                        </div>
+                        <div>
+                            <input type="checkbox" id="hidden">
+                        </div>
                     </div>
-                    <div>
-                        <input type="checkbox" id="hidden">
-                    </div>
-                </div>
-            
-        </div>
-    <!-- chart of data -->
-        
-        <div id='chart-container'>
-            <div style="display:flex; justify-content: center;">
-                <div class="chart-title">Chart Title</div>
+                
             </div>
-            <canvas id="gradesChart" style="height: 300px; width: 500px;"></canvas>
+        <!-- chart of data -->
+            
+            <div id='chart-container'>
+                <div style="display:flex; justify-content: center;">
+                    <div class="chart-title">Chart Title</div>
+                </div>
+                <canvas id="gradesChart" style="height: 300px; width: 500px;"></canvas>
+            </div>
         </div>
-
+    </div>
     <!-- end chart of data -->
     <!-- table of data -->
-    </div>
-        <div class="table-container">
-            <table>
-                <thead>
-                    <tr id="stat_table_head">
-                    </tr>
-                </thead>
-                <tbody id="stat_table">
-                </tbody>
-            </table>
+
+    <div class="table-wrapper">
+        <div class="search-container">
+            <input type="text" id="searchBox" onkeyup="myFunction()" placeholder="Search for Assignments..">
         </div>
+        <div class="table-container">
+            <div>
+                <table id="statisticsTable">
+                    <thead>
+                        <tr id="stat_table_head">
+                        </tr>
+                    </thead>
+                    <tbody id="stat_table">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
         
     <!-- end table of data -->
     
