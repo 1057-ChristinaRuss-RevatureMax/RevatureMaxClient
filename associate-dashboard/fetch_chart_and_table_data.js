@@ -72,9 +72,9 @@ function get_table(){
 	let host = "https://localhost";
 	let endpoint = "/test/"; //TODO select endpoint for associate dashboard data
 	let url = host + ':' + port + endpoint;
+	url =  "https://1551d9af-02b6-4fac-b84d-5088ef33a6ba.mock.pstmn.io" + endpoint;
 	fetch(url, {
 		method: 'GET',
-		mode: 'cors',
 	}).then(response =>{
 		console.log('reply:')
 		console.log(response)
@@ -83,7 +83,6 @@ function get_table(){
 		console.log('mistakes were made:')
 		console.log(err)
 	}).then(response_dict =>{
-
 		console.log('final step:')
 		console.log(response_dict)
 		console.log(typeof(response_dict))
@@ -165,24 +164,7 @@ function editChart(id){;
 }
 
 
-/* the following is for testing purposes, remove when endpoint is mocked/ready... */
-dict = {};
-["label","date","score","batchAverage"].forEach(x=>{
-	dict[x]=[];
-	for(i = 0; i < 10; i++){
-		if(x != "date"){
-			dict[x].push("such a " + x + " " + i);
-		}
-		else{
-			dict[x].push("Week "+ i);
-		}
-	};
-});
-
-
-build_table(dict);
-
-
+get_table()
 
 // This can be used to hide data within the chart options . . .
 
