@@ -1,32 +1,3 @@
-/*
-<td>Assessment label</td>
-<td>Date</td>
-<td>Score</td>
-<td>Batch Average Score</td>
-*/
-
-
-// need to create a function that will take in the QC scores and assign them a weight. Then it will
-// add that data into the table under th respective week they belong
-
-
-
-
-	// "1": {
-	// 	"Average": "Good", 
-	// 	"Notes": "This is a Qc note on week 1", 
-	// 	"Score": "Good", 
-	// 	"Type": "QC"
-	//   }, 
-	//   "2": {
-	// 	"Average": "Average", 
-	// 	"Notes": "This is a Qc note on week 2", 
-	// 	"Score": "Good", 
-	// 	"Type": "QC"
-	//   }, 
-
-
-
 
 function get_qc_data() {
     // let url = "Zach's QC endpoint";
@@ -80,14 +51,9 @@ function build_table(data){
 			if (qcData[key]["week"] == current_week) {
 				flag = true;
 				qctr = document.createElement("tr");
-				//console.log("I am inside the outer loop")
 				Object.keys(qcData[key]).forEach(function(innerkey) {
-					//console.log("I am inside the inner loop")
 					var qctd = document.createElement("td")
 					if(innerkey !== "Notes"){
-						//console.log("I am inside the if")
-						//console.log(qcData[key][innerkey])
-						//console.log(typeof qcData[key][innerkey])
 						qctd.textContent = qcData[key][innerkey]
 						qctr.appendChild(qctd)
 					}
@@ -95,7 +61,6 @@ function build_table(data){
 			}
 		  });
 		  if(flag == true){
-			  //console.log("Why am I not appending")
 			  let tbody = document.getElementById("stat_table");
 			  tbody.appendChild(qctr)
 		  }
@@ -118,100 +83,87 @@ function get_table(){
 		console.log('mistakes were made:')
 		console.log(err)
 	}).then(response_dict =>{
-/*
-{
-  "data": {
-    [
-      aColumn : [
-        avalue0,
-        avalue1,
-        avalue2
-      ],
-      bColumn : [
-        bvalue0,
-        bvalue1,
-        bvalue2
-      ],
-      cColumn : [...],
-      dColumn : [...],
-      eColumn : [...],
-      fColumn : [...]
-    ]
-  },
-  "chartData": {
-  legend0: [
-    Y0,
-    Y0 + (0.33 * (Y3 - Y0)),
-    Y0 + (0.66 * (Y3 - Y0)),
-    Y3,
-    Y4,
-    Y4 + (0.5 * (Y6 - Y4)),
-    Y6
-  ],
-  legend1: [...],
-  legend2: [...]
-  }
-}
-*/
+
 		console.log('final step:')
 		console.log(response_dict)
 		console.log(typeof(response_dict))
 		if (typeof(response_dict) != 'undefined'){
-			graphIt(response_dict["chartData"]);
 			build_table(response_dict["data"]);
 		}
 	})
 }
 
-async function loadData(dataList){
-    var chartData = [];
-    const color = ['#eb4030', '#eb4030', '#eb4030'];
-    const bColor = ['rgb(255, 99, 132)', 'rgb(255, 99, 132)', 'rgb(255, 99, 132)'];
+const dummyData = { 'associate': [0, 10, 20, 30, 40, 50, 60 ,70, 80, 90], 'batch':[0, 10, 30, 20, 40, 60, 50], 'henry':[100, 100, 100, 100, 100, 100, 100, 100]};
+// function loadData() must be called after chart is declared in js file
+// to change color of chart you only have change these color arrays
+const fillColor = ['#72A4C299', '#FCB41499', '#F2692599'];
+const lineColor = ['#72A4C2', '#FCB414', '#F26925'];
+
+var ctx = document.getElementById('gradesChart').getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'line',
+    data:{
+        labels: ['Week 1', 'Week 2', 'Week 3', 'Week 3', 'Week 4', 'Week 5', 
+            'Week 6', 'Week 7', 'Week 8', 'Week 9', 'Week 10', 'Week 11'],
+        datasets: ""},
+        
+    options: {
+        legend: {
+            display: false
+        },
+        scales: {
+            y: {
+                beginAtZero: true,
+            }
+        }
+    }
+});
+
+loadData(dummyData)
+
+function loadData(dataList){
+    var i = 0;
     for(label in dataList){
-        let i = 0;
         let setLabel = label; // ledgend label
         let setData =  Object.values(dataList[label]);  // data to be graphed
-        let setColor = color[i]; // color of this datas background
-        let setBorderColor = bColor[i]; // color of ths datas trace
-        let parsedData = {label: setLabel, data: setData, backgroundColor: setColor, borderColor: setBorderColor, borderWidth: 1,};
+        let setColor = fillColor[i]; // color of this datas background
+        let setBorderColor = lineColor[i]; // color of ths datas trace
+        let parsedData = {label: setLabel, data: setData, backgroundColor: setColor, borderColor: setBorderColor, borderWidth: 1, hidden: false,};
+        
+        myChart.data.datasets.push(parsedData);
+        buildLegend(label, lineColor[i]);
         i++;
-        chartData.push(parsedData);
     };
-    return chartData;
+    myChart.update();
 }
 
+function buildLegend(label, color){
+    const legendChart = document.getElementById("chart-legend"); // This should be the container for the legend
+    const legendItem = document.createElement('div');
+    legendItem.setAttribute("class", "key-item");
+    
+    const button = document.createElement("button");
+    button.onclick = function () { editChart(label)};
+    legendItem.appendChild(button);
+    button.style.backgroundColor = color;
 
-async function graphIt(data){
-	var Data = await loadData(data);
-	console.log(Data[0])
+    const labelTitle = document.createElement("p");
+    labelTitle.innerHTML= label;
+    labelTitle.onclick = function () { editChart(label)};
+    legendItem.appendChild(labelTitle);
 
-	// Data[0].hidden = "true";
-	
-    var ctx = document.getElementById('gradesChart').getContext('2d');
-    var myChart = new Chart(ctx, {
-        type: 'line',
-        data:{
-            labels: ['Week 1', 'Week 2', 'Week 3', 'Week 3', 'Week 4', 'Week 5', 
-                'Week 6', 'Week 7', 'Week 8', 'Week 9', 'Week 10', 'Week 11'],
-            datasets: Data,},
-            
-		options: {
-			normalized: true,
-			maintainAspectRatio: false,
-			scales: {
-				y: {
-					beginAtZero: true,
-				}
-			}
-		}
-    });
-	return myChart
- }
+    legendChart.appendChild(legendItem);
+}
 
-// let mockdata = { 'associate': [0, 10, 20, 30, 40, 50, 60 ,70, 80, 90], 'batch':[0, 10, 30, 20, 40, 60, 50], 'henry':[100, 100, 100, 100, 100, 100, 100, 100]}
+function editChart(id){;
+    myChart.data.datasets.forEach(function(ds) {
+        if(ds.label == id)
+            {ds.hidden = !ds.hidden;}
+        console.log(id);
+      });
+        myChart.update();
+}
 
-let mockdata = { 'associate': [0, 10, 20, 30, 40, 50, 60 ,70, 80, 90]}
-var chart = graphIt(mockdata);
 
 /* the following is for testing purposes, remove when endpoint is mocked/ready... */
 dict = {};
