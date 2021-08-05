@@ -1,9 +1,9 @@
 from selenium import webdriver
-#from path_to_poms import pom_name_here
+import os
 
 def before_all(context):
 	context.driver = webdriver.Firefox() # the one true browser
-	#context.my_pom_abbreviation = pom_name_here(context.driver)
+	context.associate_dashboard_url = os.environ["front_end_url"]
 
 def before_step(context, step):
 	pass
