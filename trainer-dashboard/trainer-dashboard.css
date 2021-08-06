@@ -11,6 +11,42 @@ secondary colors:
  * #B9B9BA / rgb 185, 185, 186 (light gray)
  */
 
+ table {
+    background: #474C55;
+    color: #fff;
+    border: solid .5em #474C55;
+    margin: 1em;
+  }
+  
+  
+  th {
+    width: 200px;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 3.8);
+    background-color: #f5f5f5;
+    border-bottom: #fff;
+    color: #000;
+  }
+  
+  td {
+    
+    width: 200px;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 3.8);
+    background-color: #474C55;
+    opacity: 0.55;
+    color: #f5f5f5;
+    
+  }
+  
+  tr:hover{
+    background-color: #8992a3
+    
+  }
+
+
+
+
+/* Kents original CSS */
+
 body{
     min-height: 100vh;
     background: linear-gradient( white ,#F26925 );

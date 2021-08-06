@@ -25,28 +25,28 @@
             </div> -->
             <ul class="tabs">
                 <li class="active tab" data-tab-target="#dashboard-tab">
-                    <img src="icons8-dashboard-layout-24.png" alt="Dashboard Icon">
+                    <img src="../trainer-dashboard/img/icons8-dashboard-layout-24.png" alt="Dashboard Icon">
                     <span>Dashboard</span>
                     
                 </li>
                 <li class="tab" data-tab-target="#statistics-tab">
-                    <img src="icons8-statistics-24.png" alt="Statistics Icon">
+                    <img src="../trainer-dashboard/img/icons8-statistics-24.png" alt="Statistics Icon">
                     <span>Statistics</span>
                 </li>
                 <li class="tab" data-tab-target="#settings-tab">
-                    <img src="icons8-settings-30.png" alt="Settings Icon">
+                    <img src="../trainer-dashboard/img/icons8-settings-30.png" alt="Settings Icon">
                     <span>Settings</span>
                 </li>
             </ul>
 
             <div class="user">
-                <img src="icons8-user-24.png" alt="User Icon">
+                <img src="../trainer-dashboard/img/icons8-user-24.png" alt="User Icon">
                 <h2>John Doe</h2>
                 <h3>Elite Trainer</h3>
             </div>
 
             <div id="logout">
-                <img src="icons8-logout-rounded-left-32.png" alt="logout Icon">
+                <img src="../trainer-dashboard/img/icons8-logout-rounded-left-32.png" alt="logout Icon">
                 <h3>Logout</h3>
             </div>
 
@@ -55,15 +55,27 @@
         <div class="content">
             <div class="search">
                 <h1>Search</h1>
-                <input type="text">
+                <input type="text" id="searchBox" onkeyup="myFunction()" placeholder="Search for Associates...">
             </div>
             <div class="cards">
                 <div class="card">
                     <div class="tab-content">
                         
                         <div id="dashboard-tab" data-tab-content class="active">
-                            <h1>Dashboard</h1>
-                            <p>Content in the Dashboard</p>
+                            <!-- This needs to be a table that container the single static row for batch average -->
+                            <table id="batch-table">
+                                <thead id="batch-table-head">
+                                </thead>
+                            </table>
+
+
+                            <table id="associate-table">
+                                <thead id="associate-table-head">
+                                </thead>
+                                <tbody id="associate-table-data">
+                                </tbody>
+                            </table>
+                            <!-- This is where we will put the table for the associate names -->
                         </div>
 
                         <div id="statistics-tab" data-tab-content>
