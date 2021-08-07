@@ -19,12 +19,32 @@ tabs.forEach(tab => {
     });
 });
 
+
+// Instead of mockdata, we will be using a fetch request to call the endpoint from the Python Team
+// Matthew Piazza knows more about this endpoint
+
+// When we make a call to this endpoint, we will get back an email for each associate as well.
+// For Python team to pull this data, we need to send them the batch ID we get from a cookie.
+
+// To get the cookie, use document.cookie -- then we need to parse the cookie and pull the batch ID out. 
+
+// javalin-cookie-store=eyJiYXRjaElEIjoiVFItMTAyMSJ9; batchID=TR-1021
+
+let cookie = "javalin-cookie-store=eyJiYXRjaElEIjoiVFItMTAyMSJ9; batchID=TR-1021"
+
+if (cookie.includes("batchID")){
+    console.log(cookie.slice(cookie.search("batchID")))
+}
+
+// This is how we will parse the cookie so that we can return it in the fetch request
+
+
 var mockdata = {0:{"Associate Name": ["BatchAverage", "name2", "name3"]},
                 1:{"Quiz Score": ["77", "89", "34"]},
                 2:{"Exam Score": ["34", "77", "89"]},
                 3:{"Project Score": ["23", "77", "34"]},
-                4:{"Verbal Score": ["55", "77", "22"]}}
-
+                4:{"Verbal Score": ["55", "77", "22"]},
+                5:{"Email": ["BATCH", "EMAIL1", "EMAIL2"]}}
 // We need to convert the data to row format if possible
 
 // build the table based on the mock data
@@ -32,20 +52,28 @@ var mockdata = {0:{"Associate Name": ["BatchAverage", "name2", "name3"]},
 
 function build_table(tabledata) {
 	let columns = [];
+    let emails = [];
     let thead = document.getElementById("associate-table-head")
     let tr = document.createElement("tr")
 	Object.keys(tabledata).forEach(outer=>{
         Object.keys(tabledata[outer]).forEach(x=>{
-            console.log(x)
-            let th = document.createElement("th")
-            th.textContent = x;
-            tr.appendChild(th);
-            columns.push(tabledata[outer][x]);
+            if(x != "Email"){
+                console.log(x)
+                let th = document.createElement("th")
+                th.textContent = x;
+                tr.appendChild(th);
+                columns.push(tabledata[outer][x]);
+            }
+            else {
+                console.log("I am inside the else")
+                console.log(x)
+                emails.push(tabledata[outer][x])
+            }
         });
     });
 
     thead.appendChild(tr);
-	
+	console.log(emails)
 	let endi = columns[0].length;
 	let endj = columns.length;
     let btbody = document.getElementById("batch-table-head");
@@ -54,12 +82,14 @@ function build_table(tabledata) {
 	for(i = 0; i < endi; i++){
         
 		let tr = document.createElement("tr");
-
-        tr.setAttribute("onClick", "redirect()")
+        console.log(emails[0][i])
+        tr.setAttribute("onClick", "redirect(" +  "\"" + emails[0][i] + "\")")
         let btr = document.createElement("tr")
 		tr.id = "row"+i;
 		for(j = 0; j < endj; j++){
             if(i !== 0){
+                
+               
                 let td = document.createElement("td")
 			    td.textContent = columns[j][i] 
 			    tr.appendChild(td)
@@ -118,6 +148,6 @@ function myFunction() {
   }
 
 
-  function redirect() {
-      window.location.href = "http://localhost"
+  function redirect(email) {
+      window.location.href = "http://localhost/trainer-dashboard/" + email
   }
