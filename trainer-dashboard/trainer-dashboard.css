@@ -11,6 +11,55 @@ secondary colors:
  * #B9B9BA / rgb 185, 185, 186 (light gray)
  */
 
+/* chart css from associate dashboard */
+
+.btn-container {
+    display: flex;
+    flex-direction: row;
+    
+}
+
+
+.btn-container button{
+    /* background: red; */
+    background: inherit;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    width: 50%;
+    color: white;
+}
+
+.btn-container button.active{
+    /* background: red; */
+    background: linear-gradient(to right bottom, rgba(214, 228, 255, 0.7),rgba(174, 182, 197, 0.3));
+}
+
+.btn-container button:hover{
+    /* background: red; */
+    background: linear-gradient(to right bottom, rgba(214, 228, 255, 0.7),rgba(174, 182, 197, 0.3));
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+}
+
+#chart-container{
+    padding: 1em; 
+    margin-left: 5em; 
+    background:  rgba(255, 255, 255, 0.7);
+    border-radius: 20px;
+    margin: 1em;
+}
+
+p {
+    color: white;
+}
+canvas {
+    border-radius: 20px;
+}
+
  table {
     background: #474C55;
     color: #fff;
@@ -151,7 +200,6 @@ h2{
     margin-top: 2em;
     margin-bottom: 2em;
     margin-right: 2em;
-    padding: 1em;
     box-shadow: 6px 6px 20px rgba(255, 255, 255, 0.3);
 }
 

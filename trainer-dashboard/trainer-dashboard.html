@@ -7,6 +7,7 @@
     <title>Background color experiment</title>
     <link rel="stylesheet" href="../trainer-dashboard/trainer-dashboard.css">
     <link rel="stylesheet" href="../revature-styles/main.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
 </head>
 <body>
     <div class="glass">
@@ -25,12 +26,12 @@
                 <h3>Settings</h3>
             </div> -->
             <ul class="tabs">
-                <li class="active tab" data-tab-target="#dashboard-tab">
+                <li class="active tab" data-tab-target="#dashboard-tab" id="dash-tab-btn">
                     <img src="../trainer-dashboard/img/icons8-dashboard-layout-24.png" alt="Dashboard Icon">
                     <span>Dashboard</span>
                     
                 </li>
-                <li class="tab" data-tab-target="#statistics-tab">
+                <li class="tab" data-tab-target="#statistics-tab" id="stats-tab-btn">
                     <img src="../trainer-dashboard/img/icons8-statistics-24.png" alt="Statistics Icon">
                     <span>Statistics</span>
                 </li>
@@ -56,52 +57,95 @@
         <div class="content">
             <div class="search">
                 <h1>Search</h1>
-                <input type="text" id="searchBox" onkeyup="myFunction()" placeholder="Search for Associates...">
+                <input type="text" id="searchBox" onkeyup="associateFunction(); statsFunction();" placeholder="Search for Associates...">
             </div>
             <div class="cards">
                 <div class="card">
                     <div class="tab-content">
-                        
+                      <!-- Start of dashboard tab   -->
                         <div id="dashboard-tab" data-tab-content class="active">
-                            <!-- This needs to be a table that container the single static row for batch average -->
                             <table id="batch-table">
                                 <thead id="batch-table-head">
                                 </thead>
                             </table>
 
 
-                            <table id="associate-table">
+                            <table id="associate-table" class="tdashtable">
                                 <thead id="associate-table-head">
                                 </thead>
                                 <tbody id="associate-table-data">
                                 </tbody>
                             </table>
-                            <!-- This is where we will put the table for the associate names -->
                         </div>
+                        <!-- End of dashboard tab -->
 
                         <div id="statistics-tab" data-tab-content>
-                            <h1>Statistics</h1>
-                            <p>Content in the Statistics</p>
-                            <div class="card">
-                                <table>
-                                    <tr>
-                                        <th>Sample Header 1</th>
-                                        <th>Sample Header 2</th>
-                                        <th>Sample Header 3</th>
-                                    </tr>
-                                    <tr>
-                                        <td>Row 1 Data 1</td>
-                                        <td>Row 1 Data 2</td>
-                                        <td>Row 1 Data 3</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Row 2 Data 1</td>
-                                        <td>Row 2 Data 2</td>
-                                        <td>Row 2 Data 3</td>
-                                    </tr>
-                                </table>
+                            <div class="btn-container">
+                                <button class="tablinks active" style="border-top-left-radius: 20px;" onClick="changeTab(event, 'chart')">Chart</button>
+                                <button class="tablinks" style="border-top-right-radius: 20px;" onClick="changeTab(event, 'table')">Table</button>
                             </div>
+                            <div id="chart" class="tabcontent">
+                                <div class="center-chart">
+                                    <div class="chart-wrapper" style="display:flex;">
+                                        <div style="display: flex; justify-content:left;">
+                                            
+                                                <div class="chart-options-container" id="chart-legend" style="margin-left: 3em; margin-top: 5em; width: 130px;">
+                                                    <div style="border-bottom: solid 0.1em #fff;">
+                                                        <div style="padding: 0.1em; color: white; font-size: 20px;">Standing: - - -</div>
+                                                    </div>
+                                                </div>
+                                            
+                                        </div>
+                                    <!-- chart of data -->
+                                        
+                                        <div id='chart-container' style= "padding: 1em; margin-left: 4em;">
+                                            <div style="display:flex; justify-content: center;">
+                                                <div class="chart-title">Associate Grades</div>
+                                            </div>
+                                            <canvas id="gradesChart" style="min-height: 350px; min-width:600px;"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="table" class="tabcontent" style="display: none;">
+                                <div class="table-wrapper">
+                                    <div class="table-container">
+                                        <div>
+                                            <table id="statistics-table" class="tdashtable">
+                                                <thead>
+                                                    <tr id="stat_table_head">
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="stat_table">
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+<!-- 
+                            <div class="table-wrapper">
+                                <div class="search-container">
+                                    <input type="text" id="searchBox" onkeyup="myFunction()" placeholder="Search for Assignments..">
+                                </div>
+                                <div class="table-container">
+                                    <div>
+                                        <table id="statisticsTable">
+                                            <thead>
+                                                <tr id="stat_table_head">
+                                                </tr>
+                                            </thead>
+                                            <tbody id="stat_table">
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div> -->
                         </div>
+
+
+
+                        
 
                         <div id="settings-tab" data-tab-content>
                             <h1>Settings</h1>
