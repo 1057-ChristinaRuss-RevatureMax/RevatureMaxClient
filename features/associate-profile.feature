@@ -5,6 +5,7 @@ Feature: Associate profile page functionality
 
  Scenario: An associate would like to view their profile
   Given the user is on the associate profile page
+  And the associates info is reset
   Then the associate can view their profile information
 
  Scenario: An associate would like to edit their name and email address

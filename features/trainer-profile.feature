@@ -5,12 +5,13 @@ Feature: Trainer profile page functionality
 
  Scenario: A trainer would like to view their profile
   Given the user is on the trainer profile page
+   And the trainers info is reset
   Then the trainer can view their profile information
 
  Scenario: A trainer would like to edit their name and email address
   Given the user is on the trainer profile page
   When the user clicks the edit contact info button
-  And the user inputs new contact info
+  And the trainer inputs new contact info
   And the user clicks the submit contact info button
   Then the contact info is updated
 

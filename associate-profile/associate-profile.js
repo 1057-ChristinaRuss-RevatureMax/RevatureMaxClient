@@ -36,12 +36,8 @@ cancelBio.onclick = resetBioForm
 editFavTechnologies.onclick = setupFavTechnologiesForm
 cancelFavTechnologies.onclick = resetFavTechnologiesForm
 
-// mock session variable for user
-const currentUser = "userID"
-
 // get the info for the current user
-getAssociateInfo(currentUser)
-setFormActions(currentUser)
+getAssociateInfo()
 
 contactInfoForm.onsubmit = function (form) {
     // stop the regular form submission
@@ -56,7 +52,7 @@ contactInfoForm.onsubmit = function (form) {
 
     // get the rest of the info from the elements on the page
     newInfo["bio"] = bio.innerText
-    newInfo["favoriteTechnologies"] = [tech1.innerText, tech2.innerText, tech3.innerText]
+    newInfo["favoriteTechnologies"] = tech1.innerText + '~' + tech2.innerText + '~' + tech3.innerText
     newInfo["preference"] = preference.innerText
 
     // construct an HTTP request
@@ -69,7 +65,7 @@ contactInfoForm.onsubmit = function (form) {
 
     xhr.onloadend = function () {
         // update the info on the page
-        getAssociateInfo(currentUser)
+        getAssociateInfo()
 
         // reset the form elements
         resetContactInfoForm()
@@ -89,7 +85,7 @@ bioForm.onsubmit = function (form) {
     newInfo["firstName"] = firstName.innerText
     newInfo["lastName"] = lastName.innerText
     newInfo["emailAddress"] = email.innerText
-    newInfo["favoriteTechnologies"] = [tech1.innerText, tech2.innerText, tech3.innerText]
+    newInfo["favoriteTechnologies"] = tech1.innerText + '~' + tech2.innerText + '~' + tech3.innerText
     newInfo["preference"] = preference.innerText
 
     // construct an HTTP request
@@ -102,7 +98,7 @@ bioForm.onsubmit = function (form) {
 
     xhr.onloadend = function () {
         // update the info on the page
-        getAssociateInfo(currentUser)
+        getAssociateInfo()
 
         // reset the form elements
         resetBioForm()
@@ -116,7 +112,7 @@ favTechnologiesForm.onsubmit = function (form) {
     let newInfo = {}
 
     // get the info from the form that we submitted
-    newInfo["favoriteTechnologies"] = [this["tech1"].value, this["tech2"].value, this["tech3"].value]
+    newInfo["favoriteTechnologies"] = this["tech1"].value + '~' + this["tech2"].value + '~' + this["tech3"].value
     newInfo["preference"] = this["preference"].value
 
     // get the rest of the info from the elements on the page
@@ -136,17 +132,19 @@ favTechnologiesForm.onsubmit = function (form) {
 
     xhr.onloadend = function () {
         // update the info on the page
-        getAssociateInfo(currentUser)
+        getAssociateInfo()
 
         // reset the form elements
         resetFavTechnologiesForm()
     }
 }
 
-async function getAssociateInfo(id) {
-    let url = "http://localhost:5000/associate/" + id
+async function getAssociateInfo() {
+    let url = "http://localhost:9001/editassociateprofile"
     let response = await fetch(url)
+    console.log(response)
     let associateInfo = await response.json()
+    console.log("associate info = " + associateInfo)
     firstName.innerText = associateInfo["firstName"]
     newFirstName.value = associateInfo["firstName"]
     lastName.innerText = associateInfo["lastName"]
@@ -156,7 +154,7 @@ async function getAssociateInfo(id) {
     bio.innerText = associateInfo["bio"]
     bio.style.height = "fit-content"
     newBio.value = associateInfo["bio"]
-    let favTechs = associateInfo["favoriteTechnologies"]
+    let favTechs = associateInfo["favoriteTechnologies"].split("~", 3)
     tech1.innerText = favTechs[0]
     newTech1.value = favTechs[0]
     tech2.innerText = favTechs[1]
@@ -246,10 +244,4 @@ function resetFavTechnologiesForm() {
     newTech2.style.display = "none"
     newTech3.style.display = "none"
     newPreference.style.display = "none"
-}
-
-function setFormActions(id){
-    contactInfoForm.action = contactInfoForm.action + id
-    bioForm.action = bioForm.action + id
-    favTechnologiesForm.action = favTechnologiesForm.action + id
 }

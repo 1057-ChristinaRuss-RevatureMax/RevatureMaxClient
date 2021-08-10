@@ -1,4 +1,5 @@
 from selenium import webdriver
+from poms.AssociateProfilePage import AssociateProfilePage
 
 
 def before_scenario(context, scenario):
