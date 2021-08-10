@@ -36,9 +36,9 @@
                         <h3 id="profileUser"><br><span id="profileEmail"></span></h3>
                         <ul>
                             <li><img src="https://s2.svgbox.net/materialui.svg?color=white&ic=edit"><a
-                                    href="http://localhost:9001/EditProfile"> Edit profile</a></li>
+                                    href="https://revature-max.s3.us-east-1.amazonaws.com/associate-profile/associate-profile.html"> Edit profile</a></li>
                             <li><img src="https://s2.svgbox.net/materialui.svg?color=white&ic=vpn_key"><a
-                                    href="http://localhost:9001/ChangePassword"> Change Password </a></li>
+                                    href="https://revature-max.s3.us-east-1.amazonaws.com/password-change/password-change.html"> Change Password </a></li>
                             <li><img src="https://s2.svgbox.net/materialui.svg?color=white&ic=delete_forever"> <a
                                     onclick="confirmDelete();">Delete Account </a></li>
                         </ul>
@@ -47,7 +47,7 @@
             </div>
         </div>
     </header>
-    <form id="updateContactInfo" name="updateContactInfo" action="http://localhost:5000/associate/" method="POST">
+    <form id="updateContactInfo" name="updateContactInfo" action="http://18.209.14.19:9001/editassociateprofile" method="POST">
         <h1>Contact Information</h1>
         <img src="./revature-styles/edit.png" id="editContactInfo">
         <input type="submit" value="Update" id="submitContactInfo" style="display: none;">
@@ -68,7 +68,7 @@
             <input id="editEmail" name="emailAddress" type="email" style="display: none;">
         </div>
     </form>
-    <form id="updateBio" name="updateBio" action="http://localhost:5000/associate/" method="POST">
+    <form id="updateBio" name="updateBio" action="http://18.209.14.19:9001/editassociateprofile" method="POST">
         <h1>About Me</h1>
         <img src="./revature-styles/edit.png" id="editBio">
         <input type="submit" value="Update" id="submitBio" style="display: none;">
@@ -76,7 +76,7 @@
         <p id="userBio"></p>
         <textarea id="newBio" name="bio" wrap="hard" minlength="1" style="display: none;"></textarea>
     </form>
-    <form id="updateFavTechnologies" name="updateFavTechnologies" action="http://localhost:5000/associate/" method="POST">
+    <form id="updateFavTechnologies" name="updateFavTechnologies" action="http://18.209.14.19:9001/editassociateprofile" method="POST">
         <h1>Favorite Technologies</h1>
         <img src="./revature-styles/edit.png" id="editFavTechnologies">
         <input type="submit" value="Update" id="submitFavTechnologies" style="display: none;">
@@ -93,10 +93,10 @@
                 <p id="userPreference"></p>
                 <select id="editPreference" name="preference" style="display: none;">
                     <option value="" disabled selected>Preference</option>
-                    <option value="Frontend">Frontend</option>
-                    <option value="Backend">Backend</option>
-                    <option value="DevOps">DevOps</option>
-                    <option value="Indifferent">Indifferent</option>
+                    <option id="frontend" value="Frontend">Frontend</option>
+                    <option id="backend" value="Backend">Backend</option>
+                    <option id="devops" value="DevOps">DevOps</option>
+                    <option id="indifferent" value="Indifferent">Indifferent</option>
                 </select>
             </li>
         </ul>
