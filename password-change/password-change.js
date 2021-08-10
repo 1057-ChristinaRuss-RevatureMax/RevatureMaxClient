@@ -1,5 +1,5 @@
 async function invalid() {
-    let url = 'http://localhost:9001/invalidpassword'
+    let url = 'http://18.209.14.19:9001/invalidpassword'
     let response = await fetch(url)
     let element = document.getElementById("invalid")
     let msg = await response.json();

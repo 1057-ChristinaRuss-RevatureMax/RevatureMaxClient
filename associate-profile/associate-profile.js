@@ -144,7 +144,7 @@ favTechnologiesForm.onsubmit = function (form) {
 }
 
 async function getAssociateInfo(id) {
-    let url = "http://localhost:5000/associate/" + id
+    let url = "http://18.209.14.19:9001/associate/" + id
     let response = await fetch(url)
     let associateInfo = await response.json()
     firstName.innerText = associateInfo["firstName"]
