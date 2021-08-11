@@ -81,22 +81,21 @@ function build_dashboard_table(tabledata) {
 	Object.keys(tabledata).forEach(outer=>{
         Object.keys(tabledata[outer]).forEach(x=>{
             if(x != "Email"){
-                console.log(x)
+
                 let th = document.createElement("th")
                 th.textContent = x;
                 tr.appendChild(th);
                 columns.push(tabledata[outer][x]);
             }
             else {
-                console.log("I am inside the else")
-                console.log(x)
+
                 emails.push(tabledata[outer][x])
             }
         });
     });
 
     thead.appendChild(tr);
-	console.log(emails)
+
 	let endi = columns[0].length;
 	let endj = columns.length;
     let btbody = document.getElementById("batch-table-head");
@@ -105,13 +104,13 @@ function build_dashboard_table(tabledata) {
 	for(i = 0; i < endi; i++){
         
 		let tr = document.createElement("tr");
-        console.log(emails[0][i])
+
         // tr.setAttribute("onClick", "redirect(" +  "\"" + emails[0][i] + "\")")
         statsTab = document.getElementById("statistics-tab")
         dashTab = document.getElementById("dashboard-tab")
         statsTabBtn = document.getElementById("stats-tab-btn")
         dashTabBtn = document.getElementById("dash-tab-btn")
-        tr.setAttribute("onClick", "statsTab.setAttribute(\"class\", \"active\"); dashTab.setAttribute(\"class\", \"none\"); statsTabBtn.setAttribute(\"class\", \"tab active\"); dashTabBtn.setAttribute(\"class\", \"tab\");")
+        tr.setAttribute("onClick", "statsTab.setAttribute(\"class\", \"active\"); dashTab.setAttribute(\"class\", \"none\"); statsTabBtn.setAttribute(\"class\", \"tab active\"); dashTabBtn.setAttribute(\"class\", \"tab\"); load")
         let btr = document.createElement("tr")
 		tr.id = "row"+i;
 		for(j = 0; j < endj; j++){
@@ -149,7 +148,7 @@ function associateFunction() {
     filter = input.value.toUpperCase();
     table = document.getElementById("associate-table");
     tr = table.getElementsByTagName("tr");
-    console.log(tr)
+
     // Loop through all table rows, and hide those who don't match the search query
     //Add counter before the for loop 
     let count = 0;
@@ -157,7 +156,7 @@ function associateFunction() {
     for (i = 1; i < tr.length; i++) {
       //for(j =0; j< tr[i].getElementsByTagName("td").length; j++){
       td = tr[i].getElementsByTagName("td")[0];
-      console.log(td)
+
       // Try just grabbing the child element
       
       if (td) {
@@ -209,10 +208,6 @@ function associateFunction() {
   }
 
 
-  function redirect(email) {
-      window.location.href = "http://localhost/trainer-dashboard/" + email
-  }
-
 
 
 
@@ -230,68 +225,138 @@ function associateFunction() {
 	// const response = await fetch(url);
     // let qcData = await response.json();
     
-		let qcData = {"1": {"Average": "Good", "Notes": "This is a Qc note on week 1", "Score": "Good", "Type": "QC", "week": "Week 1"}, 
-	  "2": {"Average": "Average", "Notes": "This is a Qc note on week 2", "Score": "Good", "Type": "QC","week": "Week 2"}}
+		let qcData = {"1": {"average": "Good", "notes": "This is a Qc note on week 1", "score": "Good", "type": "QC", "week": "Week 1"}, 
+	  "2": {"average": "Average", "notes": "This is a Qc note on week 2", "score": "Good", "type": "QC","week": "Week 2"}}
 	  return qcData
 }
 
-function build_statistics_table(data){
-	let thead_row = document.getElementById("stat_table_head");
-	let columns = [];
-	Object.keys(data).forEach(x=>{
-		// use keys as column header names! fun!
-		let th = document.createElement("th")
-		th.textContent = x; //TODO maybe? make a dictionary that points from these names to names we want
-		thead_row.appendChild(th);
-		
-		// pull out columns, we need rows later
-		columns.push(data[x]);
-		
-	});
 
-	//fill in table with "data"
-	let endi = columns[0].length;
-	let endj = columns.length;
-	let tbody = document.getElementById("stat_table");
-	for(i = 0; i < endi; i++){
-		let tr = document.createElement("tr");
-		tr.id = "row"+i;
-		
-		for(j = 0; j < endj; j++){
-			let td = document.createElement("td")
-			
-		
-			var current_week = columns[1][i]
-			td.textContent = columns[j][i] // i & j swapped! we were given columns!
-			tr.appendChild(td)
-		}
-		tbody.appendChild(tr);
-		// This is where we need to append the QC row
-		// Make a call to our function
+function build_statistics_table(associateData, batchData) {
+    qcData = get_qc_data()
+    let rowDict = {}
+    let batchDict = {}
+    let i = -1;
+    Object.keys(associateData["batch_grades"]).forEach(x=>{
+        let rowArr = []
+        let batchArr = []
+        i++;
+        // console.log(data["batch_grades"][x]) // This is a row for the statistics table
+        Object.keys(associateData["batch_grades"][x]).forEach(y=>{
+            // console.log(data["batch_grades"][x][y]);
+            // We need to remove trainer ID and combine score * weight...somehow...
+            rowArr.push(associateData["batch_grades"][x][y])
+            batchArr.push(batchData["batch_grades"][x][y])
+        });
+        rowDict[i] = rowArr
+        batchDict[i] = batchArr
+        console.log(rowDict)
+    });
 
-		qcData = get_qc_data()
+    // create a new row, and add the data to the row
+    let tbody = document.getElementById("stat_table");
+    let datalen = Object.keys(rowDict).length;
+    console.log(datalen)
+    
+    Object.keys(rowDict).forEach(row=>{
+        let tr = document.createElement('tr');
+        let j = 0;
+        var next_week = "";
+        Object.keys(rowDict[row]).forEach(rowData=>{
+            // This if makes it so we do not include the weight, or the trainer ID "resOfBatch"
+            if(rowData != 2 && rowData != 4){
+                if(rowData == 1){
+                    // This is the week data
+                    let td = document.createElement('td')
+                    td.textContent = "Week " + rowDict[row][3]
+                    tr.appendChild(td)
+                    // This is the score data
+                    td = document.createElement('td')
+                    td.textContent = rowDict[row][rowData]
+                    tr.appendChild(td)
+                }
+                // We need to eventually add the weights ... but this is based upon weeks ... 
+                else if(rowData == 3){
+                    
+                    if(datalen > Number(row)+1){
+                        next_week = "Week " + rowDict[Number(row) + 1][rowData];
+                    }
+                    
+                    
+                    let td = document.createElement('td')
+                    td.textContent = batchDict[row][1]
+                    tr.appendChild(td)
+                }
+                else{
+                    let td = document.createElement('td')
+                    td.textContent = rowDict[row][rowData]
+                    tr.appendChild(td)
+                }
+            }
+        });
+        // Need to append the batch score to the tr
+        tbody.appendChild(tr)
+
+        
 		//QC   Week 1    Good   Average
 		let flag = false;
 		var qctr;
+        // let qcDatalen = Object.keys(qcData).length;
+        // let nextWeek = 0;
 		Object.keys(qcData).forEach(function(key) {
-			if (qcData[key]["week"] == current_week) {
+            // console.log(qcDatalen)
+            // if(qcDatalen > Number(key)){
+            //     nextWeek = Number(key) + 1;
+            // }
+                
+            // console.log(key)    
+            // console.log(nextWeek)
+
+            let qcWeek  = qcData[key]["week"].replace(/\D/g,'');
+            let temp = next_week.replace(/\D/g,'');
+            console.log("This is the QC Week " + qcWeek)
+            console.log("This is the next week" + temp)
+			if (temp == (Number(qcWeek)+1)) {
+                console.log(qcData[key]["week"])
+                console.log(next_week)
 				flag = true;
 				qctr = document.createElement("tr");
-				Object.keys(qcData[key]).forEach(function(innerkey) {
-					var qctd = document.createElement("td")
-					if(innerkey !== "Notes"){
-						qctd.textContent = qcData[key][innerkey]
-						qctr.appendChild(qctd)
-					}
-				});
+				// Object.keys(qcData[key]).forEach(function(innerkey) {
+				// 	var qctd = document.createElement("td")
+				// 	if(innerkey !== "Notes"){
+				// 		qctd.textContent = qcData[key][innerkey]
+                        
+				// 		qctr.appendChild(qctd)
+				// 	}
+				// });
+
+                var qctd1 = document.createElement("td")
+                qctd1.textContent = qcData[key]["type"]
+                qctr.appendChild(qctd1)
+
+                var qctd2 = document.createElement("td")
+                qctd2.textContent = qcData[key]["week"]
+                qctr.appendChild(qctd2)
+
+                var qctd3 = document.createElement("td")
+                qctd3.textContent = qcData[key]["score"]
+                qctr.appendChild(qctd3)
+
+                var qctd4 = document.createElement("td")
+                qctd4.textContent = qcData[key]["average"]
+                qctr.appendChild(qctd4)
+
+                delete qcData[key]
 			}
 		  });
 		  if(flag == true){
 			  let tbody = document.getElementById("stat_table");
 			  tbody.appendChild(qctr)
 		  }
-	}
+    });
+    
+    
 }
+
 
 function get_table(){
 	let port = 5000;
@@ -345,7 +410,7 @@ var myChart = new Chart(ctx, {
     }
 });
 
-loadData(dummyData)
+
 
 function loadData(dataList){
     var i = 0;
@@ -385,7 +450,6 @@ function editChart(id){;
     myChart.data.datasets.forEach(function(ds) {
         if(ds.label == id)
             {ds.hidden = !ds.hidden;}
-        console.log(id);
       });
         myChart.update();
 }
@@ -405,4 +469,309 @@ dict = {};
 	};
 });
 
-build_statistics_table(dict);
+async function get_big_spenders() {
+    let url = ""
+    if (cookie.includes("batchID")){
+        console.log(cookie.slice(cookie.search("batchID")))
+        url = "http://localhost:5000/grades/reports/" +cookie.slice(cookie.search("batchID"))+ "/spider";
+    }
+    else {
+        url = "http://localhost:5000/grades/reports/BatchID/spider"
+    }
+    
+	const response = await fetch(url);
+    let temp = await response.json();
+    console.log(ids);
+
+
+let temp = {
+	"batch_grades": [
+	  {
+		"assessmentType": "Hadoop", 
+		"score": 52.05628009982731, 
+		"traineeId": "restOfBatch", 
+		"week": 1, 
+		"weight": 100.0
+	  }, 
+	  {
+		"assessmentType": "C#", 
+		"score": 55.81805974504222, 
+		"traineeId": "restOfBatch", 
+		"week": 1, 
+		"weight": 100.0
+	  }, 
+	  {
+		"assessmentType": "Docker", 
+		"score": 61.55324546150539, 
+		"traineeId": "restOfBatch", 
+		"week": 1, 
+		"weight": 100.0
+	  }, 
+	  {
+		"assessmentType": "Spring Boot", 
+		"score": 49.749899796817616, 
+		"traineeId": "restOfBatch", 
+		"week": 1, 
+		"weight": 100.0
+	  }, 
+	  {
+		"assessmentType": "REST", 
+		"score": 45.390597301980726, 
+		"traineeId": "restOfBatch", 
+		"week": 2, 
+		"weight": 100.0
+	  }, 
+	  {
+		"assessmentType": "SQL", 
+		"score": 42.5692092568978, 
+		"traineeId": "restOfBatch", 
+		"week": 3, 
+		"weight": 100.0
+	  },
+      {
+		"assessmentType": "SQL", 
+		"score": 42.5692092568978, 
+		"traineeId": "restOfBatch", 
+		"week": 3, 
+		"weight": 100.0
+	  }
+	]
+}
+
+
+let batchData = {
+    "batch_grades": [
+      {
+        "assessmentType": "Hadoop", 
+        "score": 42.056, 
+        "traineeId": "TR-1146", 
+        "week": 1, 
+        "weight": 100.0
+      }, 
+      {
+        "assessmentType": "C#", 
+        "score": 55.818, 
+        "traineeId": "TR-1146", 
+        "week": 1, 
+        "weight": 100.0
+      }, 
+      {
+        "assessmentType": "Docker", 
+        "score": 61.553, 
+        "traineeId": "TR-1146", 
+        "week": 1, 
+        "weight": 100.0
+      }, 
+      {
+        "assessmentType": "Spring Boot", 
+        "score": 49.749, 
+        "traineeId": "TR-1146", 
+        "week": 1, 
+        "weight": 100.0
+      }, 
+      {
+        "assessmentType": "REST", 
+        "score": 45.390, 
+        "traineeId": "TR-1146", 
+        "week": 2, 
+        "weight": 100.0
+      }, 
+      {
+        "assessmentType": "SQL", 
+        "score": 42.569, 
+        "traineeId": "TR-1146", 
+        "week": 3, 
+        "weight": 100.0
+      },
+      {
+		"assessmentType": "SQL", 
+		"score": 42.5692092568978, 
+		"traineeId": "restOfBatch", 
+		"week": 3, 
+		"weight": 100.0
+	  }]
+    }
+build_statistics_table(temp, batchData);
+
+    
+
+let chartdata = {
+	"chartData": {
+	  "Associate Exam Score": [
+		48.45003128051758, 
+		48.14583969116211, 
+		47.84164810180664, 
+		47.53745651245117, 
+		47.2332649230957, 
+		38.0053768157959, 
+		28.777488708496094, 
+		0, 
+		0
+	  ], 
+	  "Associate Other Score": [
+		65.72003936767578, 
+		85.99601745605469, 
+		81.89466349283855, 
+		77.79330952962239, 
+		73.69195556640625, 
+		0, 
+		0, 
+		0, 
+		0
+	  ], 
+	  "Associate Presentation Score": [
+		0, 
+		0, 
+		0, 
+		43.534488677978516, 
+		45.13601048787435, 
+		18.64165687561035, 
+		48.339054107666016, 
+		0, 
+		0
+	  ], 
+	  "Associate Project Score": [
+		29.688993453979492, 
+		46.215118408203125, 
+		72.59832763671875, 
+		82.6733627319336, 
+		68.84568786621094, 
+		0, 
+		0, 
+		0, 
+		0
+	  ], 
+	  "Associate Verbal Score": [
+		0, 
+		28.77274513244629, 
+		30.618759155273438, 
+		0, 
+		90.08526611328125, 
+		3.0095479488372803, 
+		0, 
+		0, 
+		0
+	  ], 
+	  "Average Exam Score": [
+		49.808984729376704, 
+		50.183863855559714, 
+		50.558742981742725, 
+		50.93362210792574, 
+		51.30850123410875, 
+		48.79655301638625, 
+		46.28460479866374, 
+		0, 
+		0
+	  ], 
+	  "Average Other Score": [
+		51.435200133106925, 
+		40.5952634296634, 
+		44.14399643919685, 
+		47.6927294487303, 
+		51.24146245826375, 
+		0, 
+		0, 
+		0, 
+		0
+	  ], 
+	  "Average Presentation Score": [
+		0, 
+		0, 
+		0, 
+		45.17336277663708, 
+		46.01144779180036, 
+		58.04101878946478, 
+		47.68761782212691, 
+		0, 
+		0
+	  ], 
+	  "Average Project Score": [
+		63.00162055275657, 
+		45.3531190698797, 
+		48.616078934208915, 
+		44.226270364089444, 
+		49.677677696401425, 
+		0, 
+		0, 
+		0, 
+		0
+	  ], 
+	  "Average Verbal Score": [
+		0, 
+		52.43995692513206, 
+		50.39589304273779, 
+		0, 
+		46.41534863818776, 
+		52.396158478476785, 
+		0, 
+		0, 
+		0
+	  ]
+	}
+  }
+  loadData(chartdata)
+
+let count = 0;
+let associateweekly = []
+let batchweekly = []
+for(let i = 0; i<chartdata["chartData"]["Associate Exam Score"].length; i++){
+    let exam = chartdata["chartData"]["Associate Exam Score"][i]
+    if(exam != 0){
+        count++
+    }
+    let other = chartdata["chartData"]["Associate Other Score"][i]
+    if(other != 0){
+        count++
+    }
+    let presentation = chartdata["chartData"]["Associate Presentation Score"][i]
+    if(presentation != 0){
+        count++
+    }
+    let project = chartdata["chartData"]["Associate Project Score"][i]
+    if(project != 0){
+        count++
+    }
+    let verbal = chartdata["chartData"]["Associate Verbal Score"][i]
+    if(verbal != 0){
+        count++
+    }
+    if(count!=0){
+        associateweekly.push((exam+other+presentation+project+verbal)/count)
+    }
+    
+    count = 0;
+    
+
+    let batchexam = chartdata["chartData"]["Average Exam Score"][i]
+    if(batchexam != 0){
+        count++
+    }
+    let batchother = chartdata["chartData"]["Average Other Score"][i]
+    if(batchother != 0){
+        count++
+    }
+    let batchpresentation = chartdata["chartData"]["Average Presentation Score"][i]
+    if(batchpresentation != 0){
+        count++
+    }
+    let batchproject = chartdata["chartData"]["Average Project Score"][i]
+    if(batchproject != 0){
+        count++
+    }
+    let batchverbal = chartdata["chartData"]["Average Verbal Score"][i]
+    if(batchverbal != 0){
+        count++
+    }
+    if(count!=0){
+        batchweekly.push((batchexam+batchother+batchpresentation+batchproject+batchverbal)/count)
+    }
+}
+console.log(batchweekly)
+
+console.log(associateweekly)
+
+let chartstuff = {}
+chartstuff["Associate"] = associateweekly
+chartstuff["Batch"] = batchweekly
+
+loadData(chartstuff)

@@ -1,3 +1,18 @@
+//http://localhost:5000/trainer/TR-1146
+// This is the endpoint to populate the trainer table. It will also give emails to use for calling the other endpoints
+
+//http://localhost:5000/reports/TR-1146/mock18.associate737560f9-bc2a-4bcb-b2b0-7413c333d623@mock.com/weekly
+// This is the endpoint to get the associate data for the chart
+
+
+// ASSOCIATE VIEW ENDPOINTS
+//http://localhost:5000/grades/reports/TR-1146/spider/mock18.associate737560f9-bc2a-4bcb-b2b0-7413c333d623@mock.com
+// This is the endpoint to get the associate data for the associate table
+
+//http://localhost:5000/grades/reports/TR-1146/spider
+// This is the endpoint to get the batch data for the associate table batch average
+
+
 
 function get_qc_data() {
     // let url = "Zach's QC endpoint";
@@ -149,6 +164,7 @@ function buildLegend(label, color){
 
     const labelTitle = document.createElement("p");
     labelTitle.innerHTML= label;
+	
     labelTitle.onclick = function () { editChart(label)};
     legendItem.appendChild(labelTitle);
 
@@ -180,7 +196,54 @@ dict = {};
 });
 
 
-build_table(dict);
+let temp = {
+	"batch_grades": [
+	  {
+		"assessmentType": "Hadoop", 
+		"score": 52.05628009982731, 
+		"traineeId": "restOfBatch", 
+		"week": 1, 
+		"weight": 100.0
+	  }, 
+	  {
+		"assessmentType": "C#", 
+		"score": 55.81805974504222, 
+		"traineeId": "restOfBatch", 
+		"week": 1, 
+		"weight": 100.0
+	  }, 
+	  {
+		"assessmentType": "Docker", 
+		"score": 61.55324546150539, 
+		"traineeId": "restOfBatch", 
+		"week": 1, 
+		"weight": 100.0
+	  }, 
+	  {
+		"assessmentType": "Spring Boot", 
+		"score": 49.749899796817616, 
+		"traineeId": "restOfBatch", 
+		"week": 1, 
+		"weight": 100.0
+	  }, 
+	  {
+		"assessmentType": "REST", 
+		"score": 45.390597301980726, 
+		"traineeId": "restOfBatch", 
+		"week": 2, 
+		"weight": 100.0
+	  }, 
+	  {
+		"assessmentType": "SQL", 
+		"score": 42.5692092568978, 
+		"traineeId": "restOfBatch", 
+		"week": 2, 
+		"weight": 100.0
+	  }
+	]
+}
+
+build_table(temp);
 
 
 
