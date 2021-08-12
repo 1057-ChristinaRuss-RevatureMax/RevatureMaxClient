@@ -453,7 +453,7 @@ function build_dashboard_table(tabledata) {
                 columns.push(tabledata[outer][x]);
             }
             else {
-                console.log(tabledata[outer][x])
+                // console.log(tabledata[outer][x])
                 emails.push(tabledata[outer][x])
             }
         });
@@ -475,8 +475,8 @@ function build_dashboard_table(tabledata) {
         dashTab = document.getElementById("dashboard-tab")
         statsTabBtn = document.getElementById("stats-tab-btn")
         dashTabBtn = document.getElementById("dash-tab-btn")
-        console.log(emails[0][i])
-        tr.setAttribute("onClick", "statsTab.setAttribute(\"class\", \"active\"); dashTab.setAttribute(\"class\", \"none\"); statsTabBtn.setAttribute(\"class\", \"tab active\"); dashTabBtn.setAttribute(\"class\", \"tab\"); build_statistics_table(\"" + emails[0][i] + "\"); build_chart_data(\"" + emails[0][i] + "\");")
+        // console.log(emails[0][i])
+        tr.setAttribute("onClick", "statsTab.setAttribute(\"class\", \"active\"); dashTab.setAttribute(\"class\", \"none\"); statsTabBtn.setAttribute(\"class\", \"tab active\"); dashTabBtn.setAttribute(\"class\", \"tab\");  clear_data(); build_statistics_table(\"" + emails[0][i] + "\"); build_chart_data(\"" + emails[0][i] + "\");")
         let btr = document.createElement("tr")
 		tr.id = "row"+i;
 		for(j = 0; j < endj; j++){
@@ -598,7 +598,7 @@ function associateFunction() {
 
 
 function build_statistics_table(email) {
-    console.log(email)
+    
     associateData = get_associate_data(email);
     qcData = get_qc_data()
     let rowDict = {}
@@ -607,13 +607,13 @@ function build_statistics_table(email) {
     for(let j = 0; j<Object.keys(associateData["data"]["Week #"]).length; j++){
         
         rowArr.push(associateData["data"]["Assessment Type"][j])
-        console.log(associateData["data"]["Assessment Type"][j])
+        // console.log(associateData["data"]["Assessment Type"][j])
         rowArr.push("Week " + associateData["data"]["Week #"][j])
         rowArr.push(associateData["data"]["My Score"][j])
         rowArr.push(associateData["data"]["Batch Averages"][j])
         rowDict[j] = rowArr
         rowArr = []
-        console.log(rowDict)
+        // console.log(rowDict)
     }
 
     // create a new row, and add the data to the row
@@ -623,7 +623,7 @@ function build_statistics_table(email) {
         let tr = document.createElement('tr');
         let j = 0;
         var next_week = "";
-        console.log(Object.keys(rowDict).length)
+        
         Object.keys(rowDict[row]).forEach(rowData=>{
             // This if makes it so we do not include the weight, or the trainer ID "resOfBatch"
             let td = document.createElement('td')
@@ -637,7 +637,7 @@ function build_statistics_table(email) {
         // Need to append the batch score to the tr
         tbody.appendChild(tr)
 
-        console.log(qcData)
+        // console.log(qcData)
 		//QC   Week 1    Good   Average
 		let flag = false;
 		var qctr;
@@ -654,11 +654,11 @@ function build_statistics_table(email) {
 
             let qcWeek  = qcData[key]["week"].replace(/\D/g,'');
             let temp = next_week.replace(/\D/g,'');
-            console.log("This is the QC Week " + qcWeek)
-            console.log("This is the next week" + temp)
+            // console.log("This is the QC Week " + qcWeek)
+            // console.log("This is the next week" + temp)
 			if (temp == (Number(qcWeek)+1)) {
-                console.log(qcData[key]["week"])
-                console.log(next_week)
+                // console.log(qcData[key]["week"])
+                // console.log(next_week)
 				flag = true;
 				qctr = document.createElement("tr");
 				// Object.keys(qcData[key]).forEach(function(innerkey) {
@@ -1115,13 +1115,35 @@ let chartdata = {
             batchweekly.push((batchexam+batchother+batchpresentation+batchproject+batchverbal)/count)
         }
     }
-    console.log(batchweekly)
+    // console.log(batchweekly)
 
-    console.log(associateweekly)
+    // console.log(associateweekly)
 
     let chartstuff = {}
     chartstuff["Associate"] = associateweekly
     chartstuff["Batch"] = batchweekly
 
     loadData(chartstuff)
+}
+
+function clear_data(){
+    try{
+        let stattable = document.getElementById("stat_table")
+        console.log("This is a first child")
+        console.log(stattable.firstChild)
+        while (stattable.firstChild) {
+          stattable.removeChild(stattable.lastChild);
+        }
+    
+        let legend = document.getElementById("chart-legend")
+        while (legend.firstChild) {
+            legend.removeChild(legend.lastChild);
+        }
+    }
+    catch {
+        console.log("Lol doesn't matter")
+    }
+
+
+
 }
