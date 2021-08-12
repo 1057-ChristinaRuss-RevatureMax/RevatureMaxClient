@@ -687,28 +687,30 @@ const fillColor = ['#72A4C299', '#FCB41499', '#F2692599'];
 const lineColor = ['#72A4C2', '#FCB414', '#F26925'];
 
 var ctx = document.getElementById('gradesChart').getContext('2d');
-var myChart = new Chart(ctx, {
-    type: 'line',
-    data:{
-        labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 
-            'Week 6', 'Week 7', 'Week 8', 'Week 9', 'Week 10'],
-        datasets: ""},
-        
-    options: {
-        legend: {
-            display: false
-        },
-        scales: {
-            y: {
-                beginAtZero: true,
-            }
-        }
-    }
-});
+
 
 
 
 function loadData(dataList){
+
+    var myChart = new Chart(ctx, {
+        type: 'line',
+        data:{
+            labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 
+                'Week 6', 'Week 7', 'Week 8', 'Week 9', 'Week 10'],
+            datasets: ""},
+            
+        options: {
+            legend: {
+                display: false
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                }
+            }
+        }
+    });
     var i = 0;
     console.log(dataList)
     for(label in dataList){
@@ -718,7 +720,7 @@ function loadData(dataList){
             let setColor = fillColor[i]; // color of this datas background
             let setBorderColor = lineColor[i]; // color of ths datas trace
             let parsedData = {label: setLabel, data: setData, backgroundColor: setColor, borderColor: setBorderColor, borderWidth: 1, hidden: false,};
-            
+            myChart.data.datasets.clear_data
             myChart.data.datasets.push(parsedData);
             buildLegend(label, lineColor[i]);
             i++;
@@ -1094,6 +1096,7 @@ function clear_data(){
         while (legend.firstChild) {
             legend.removeChild(legend.lastChild);
         }
+        myChart.destroy()
     }
     catch {
         console.log("Lol doesn't matter")
