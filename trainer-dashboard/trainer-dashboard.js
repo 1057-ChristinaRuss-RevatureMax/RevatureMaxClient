@@ -1,3 +1,368 @@
+function get_associate_data(email){
+    // console.log(email)
+	// let port = 5000;
+	// let host = "http://localhost";
+    // //+cookie.slice(cookie.search("batchID"))+
+	// let endpoint = "/associate/TR-1190/spider/" + email; //TODO select endpoint for associate dashboard data
+	// let url = host + ':' + port + endpoint;
+    // console.log(url)
+	// fetch(url, {
+	// 	method: 'GET',
+	// 	mode: 'cors',
+	// }).then(response =>{
+	// 	console.log('reply:')
+	// 	console.log(response)
+	// 	return response.json()
+	// }).catch(err =>{
+	// 	console.log('mistakes were made:')
+	// 	console.log(err)
+	// }).then(response_dict =>{
+
+	// 	console.log('final step:')
+	// 	console.log(response_dict)
+	// 	console.log(typeof(response_dict))
+	// 	if (typeof(response_dict) != 'undefined'){
+	// 		return response_dict
+	// 	}
+	// })
+    return {
+        "data": {
+          "Assessment Type": [
+            "Unix", 
+            "Hive", 
+            "AWS", 
+            "REST", 
+            "CSS", 
+            "DevOps", 
+            "HTML", 
+            "Spring Cloud", 
+            "GCP", 
+            "NoSQL", 
+            "JavaScript", 
+            "Jenkins", 
+            "Helm", 
+            "REST", 
+            "Java", 
+            "React", 
+            "J2EE", 
+            "Python", 
+            "SOAP", 
+            "Hibernate", 
+            "Hadoop", 
+            "Git"
+          ], 
+          "Batch Averages": [
+            "56.65", 
+            "54.32", 
+            "54.01", 
+            "47.09", 
+            "38.30", 
+            "46.73", 
+            "56.35", 
+            "45.62", 
+            "47.61", 
+            "46.52", 
+            "48.73", 
+            "42.74", 
+            "49.65", 
+            "44.77", 
+            "44.37", 
+            "51.57", 
+            "55.70", 
+            "50.90", 
+            "54.93", 
+            "65.52"
+          ], 
+          "My Score": [
+            "53.10", 
+            "45.62", 
+            "58.02", 
+            "42.46", 
+            "46.33", 
+            "42.64", 
+            "50.11", 
+            "52.81", 
+            "56.86", 
+            "61.01", 
+            "46.98", 
+            "61.38", 
+            "50.49", 
+            "60.54", 
+            "56.33", 
+            "35.76", 
+            "54.04", 
+            "46.77", 
+            "60.41", 
+            "38.98", 
+            "46.49", 
+            "45.91"
+          ], 
+          "Week #": [
+            1, 
+            1, 
+            1, 
+            1, 
+            2, 
+            2, 
+            3, 
+            3, 
+            3, 
+            3, 
+            4, 
+            4, 
+            4, 
+            5, 
+            5, 
+            5, 
+            6, 
+            6, 
+            6, 
+            7, 
+            7, 
+            7
+          ], 
+          "Weight": [
+            100, 
+            100, 
+            100, 
+            100, 
+            100, 
+            100, 
+            100, 
+            100, 
+            100, 
+            100, 
+            100, 
+            100, 
+            100, 
+            100, 
+            100, 
+            100, 
+            100, 
+            100, 
+            100, 
+            100, 
+            100, 
+            100
+          ]
+        }
+      }
+      
+}
+
+function get_chart_data(email){
+    // console.log(email)
+	// let port = 5000;
+	// let host = "http://localhost";
+    // //+cookie.slice(cookie.search("batchID"))+
+	// let endpoint = "/associate/TR-1190/" + email + "/weekly"; //TODO select endpoint for associate dashboard data
+	// let url = host + ':' + port + endpoint;
+    // console.log(url)
+	// fetch(url, {
+	// 	method: 'GET',
+	// 	mode: 'cors',
+	// }).then(response =>{
+	// 	console.log('reply:')
+	// 	console.log(response)
+	// 	return response.json()
+	// }).catch(err =>{
+	// 	console.log('mistakes were made:')
+	// 	console.log(err)
+	// }).then(response_dict =>{
+
+	// 	console.log('final step:')
+	// 	console.log(response_dict)
+	// 	console.log(typeof(response_dict))
+	// 	if (typeof(response_dict) != 'undefined'){
+	// 		return response_dict
+	// 	}
+	// })
+    return {
+        "chartData": {
+          "Associate Exam Score": [
+            48.45003128051758, 
+            48.14583969116211, 
+            47.84164810180664, 
+            47.53745651245117, 
+            47.2332649230957, 
+            38.0053768157959, 
+            28.777488708496094, 
+            0, 
+            0
+          ], 
+          "Associate Other Score": [
+            65.72003936767578, 
+            85.99601745605469, 
+            81.89466349283855, 
+            77.79330952962239, 
+            73.69195556640625, 
+            0, 
+            0, 
+            0, 
+            0
+          ], 
+          "Associate Presentation Score": [
+            0, 
+            0, 
+            0, 
+            43.534488677978516, 
+            45.13601048787435, 
+            18.64165687561035, 
+            48.339054107666016, 
+            0, 
+            0
+          ], 
+          "Associate Project Score": [
+            29.688993453979492, 
+            46.215118408203125, 
+            72.59832763671875, 
+            82.6733627319336, 
+            68.84568786621094, 
+            0, 
+            0, 
+            0, 
+            0
+          ], 
+          "Associate Verbal Score": [
+            0, 
+            28.77274513244629, 
+            30.618759155273438, 
+            0, 
+            90.08526611328125, 
+            3.0095479488372803, 
+            0, 
+            0, 
+            0
+          ], 
+          "Average Exam Score": [
+            49.808984729376704, 
+            50.183863855559714, 
+            50.558742981742725, 
+            50.93362210792574, 
+            51.30850123410875, 
+            48.79655301638625, 
+            46.28460479866374, 
+            0, 
+            0
+          ], 
+          "Average Other Score": [
+            51.435200133106925, 
+            40.5952634296634, 
+            44.14399643919685, 
+            47.6927294487303, 
+            51.24146245826375, 
+            0, 
+            0, 
+            0, 
+            0
+          ], 
+          "Average Presentation Score": [
+            0, 
+            0, 
+            0, 
+            45.17336277663708, 
+            46.01144779180036, 
+            58.04101878946478, 
+            47.68761782212691, 
+            0, 
+            0
+          ], 
+          "Average Project Score": [
+            63.00162055275657, 
+            45.3531190698797, 
+            48.616078934208915, 
+            44.226270364089444, 
+            49.677677696401425, 
+            0, 
+            0, 
+            0, 
+            0
+          ], 
+          "Average Verbal Score": [
+            0, 
+            52.43995692513206, 
+            50.39589304273779, 
+            0, 
+            46.41534863818776, 
+            52.396158478476785, 
+            0, 
+            0, 
+            0
+          ]
+        }
+      }
+}
+
+function get_qc_data(email){
+    // console.log(email)
+	// let port = 5000;
+	// let host = "http://localhost";
+    // //+cookie.slice(cookie.search("batchID"))+
+    // //# localhost:5000/qa/notes/trainee/SF-2274
+	// let endpoint = "/qa/notes/trainee/SF-2274/weekly"; //TODO select endpoint for associate dashboard data
+	// let url = host + ':' + port + endpoint;
+    // console.log(url)
+	// fetch(url, {
+	// 	method: 'GET',
+	// 	mode: 'cors',
+	// }).then(response =>{
+	// 	console.log('reply:')
+	// 	console.log(response)
+	// 	return response.json()
+	// }).catch(err =>{
+	// 	console.log('mistakes were made:')
+	// 	console.log(err)
+	// }).then(response_dict =>{
+
+	// 	console.log('final step:')
+	// 	console.log(response_dict)
+	// 	console.log(typeof(response_dict))
+	// 	if (typeof(response_dict) != 'undefined'){
+	// 		return response_dict
+	// 	}
+	// })
+
+    return {"1": {"average": "Good", "notes": "This is a Qc note on week 1", "score": "Good", "type": "QC", "week": "Week 1"}, 
+    "2": {"average": "Average", "notes": "This is a Qc note on week 2", "score": "Good", "type": "QC","week": "Week 2"}}
+}
+
+function get_dashboard_data(email){
+    // console.log(email)
+	// let port = 5000;
+	// let host = "http://localhost";
+    // //+cookie.slice(cookie.search("batchID"))+
+	// let endpoint = "/trainer/TR-1190; //TODO select endpoint for associate dashboard data
+	// let url = host + ':' + port + endpoint;
+    // console.log(url)
+	// fetch(url, {
+	// 	method: 'GET',
+	// 	mode: 'cors',
+	// }).then(response =>{
+	// 	console.log('reply:')
+	// 	console.log(response)
+	// 	return response.json()
+	// }).catch(err =>{
+	// 	console.log('mistakes were made:')
+	// 	console.log(err)
+	// }).then(response_dict =>{
+
+	// 	console.log('final step:')
+	// 	console.log(response_dict)
+	// 	console.log(typeof(response_dict))
+	// 	if (typeof(response_dict) != 'undefined'){
+	// 		return response_dict
+	// 	}
+	// })
+    return {0:{"Associate Name": ["BatchAverage", "John Smith", "Tanner Dixon", "DaQuarius Mink", "James Blounte", "Senjah Goudah", "Cristy Xiong"]},
+    1:{"Quiz Score": ["77", "89", "34", "24", "89", "91", "23"]},
+    2:{"Exam Score": ["34", "77", "89", "24", "66", "98", "11"]},
+    3:{"Project Score": ["23", "77", "34", "81", "75", "27", "45"]},
+    4:{"Verbal Score": ["55", "77", "22", "70", "22", "24", "94"]},
+    5:{"Email": ["BATCH", "mock18.associate737560f9-bc2a-4bcb-b2b0-7413c333d623@mock.com", "mock18.associate737560f9-bc2a-4bcb-b2b0-7413c333d623@mock.com", "mock18.associate737560f9-bc2a-4bcb-b2b0-7413c333d623@mock.com", "mock18.associate737560f9-bc2a-4bcb-b2b0-7413c333d623@mock.com", "mock18.associate737560f9-bc2a-4bcb-b2b0-7413c333d623@mock.com", "mock18.associate737560f9-bc2a-4bcb-b2b0-7413c333d623@mock.com" ]}}
+      
+}
+
+
 function changeTab(evt, tab) {
     // Declare all variables
     var i, tabcontent, tablinks;
@@ -67,7 +432,7 @@ var mockdata = {0:{"Associate Name": ["BatchAverage", "name2", "name3"]},
                 2:{"Exam Score": ["34", "77", "89"]},
                 3:{"Project Score": ["23", "77", "34"]},
                 4:{"Verbal Score": ["55", "77", "22"]},
-                5:{"Email": ["BATCH", "EMAIL1", "EMAIL2"]}}
+                5:{"Email": ["BATCH", "mock18.associate737560f9-bc2a-4bcb-b2b0-7413c333d623@mock.com", "EMAIL2"]}}
 // We need to convert the data to row format if possible
 
 // build the table based on the mock data
@@ -88,7 +453,7 @@ function build_dashboard_table(tabledata) {
                 columns.push(tabledata[outer][x]);
             }
             else {
-
+                console.log(tabledata[outer][x])
                 emails.push(tabledata[outer][x])
             }
         });
@@ -110,7 +475,8 @@ function build_dashboard_table(tabledata) {
         dashTab = document.getElementById("dashboard-tab")
         statsTabBtn = document.getElementById("stats-tab-btn")
         dashTabBtn = document.getElementById("dash-tab-btn")
-        tr.setAttribute("onClick", "statsTab.setAttribute(\"class\", \"active\"); dashTab.setAttribute(\"class\", \"none\"); statsTabBtn.setAttribute(\"class\", \"tab active\"); dashTabBtn.setAttribute(\"class\", \"tab\"); load")
+        console.log(emails[0][i])
+        tr.setAttribute("onClick", "statsTab.setAttribute(\"class\", \"active\"); dashTab.setAttribute(\"class\", \"none\"); statsTabBtn.setAttribute(\"class\", \"tab active\"); dashTabBtn.setAttribute(\"class\", \"tab\"); build_statistics_table(\"" + emails[0][i] + "\"); build_chart_data(\"" + emails[0][i] + "\");")
         let btr = document.createElement("tr")
 		tr.id = "row"+i;
 		for(j = 0; j < endj; j++){
@@ -138,7 +504,7 @@ function build_dashboard_table(tabledata) {
 }
 
 
-build_dashboard_table(mockdata)
+build_dashboard_table(get_dashboard_data())
 
 
 function associateFunction() {
@@ -231,72 +597,47 @@ function associateFunction() {
 }
 
 
-function build_statistics_table(associateData, batchData) {
+function build_statistics_table(email) {
+    console.log(email)
+    associateData = get_associate_data(email);
     qcData = get_qc_data()
     let rowDict = {}
-    let batchDict = {}
-    let i = -1;
-    Object.keys(associateData["batch_grades"]).forEach(x=>{
-        let rowArr = []
-        let batchArr = []
-        i++;
-        // console.log(data["batch_grades"][x]) // This is a row for the statistics table
-        Object.keys(associateData["batch_grades"][x]).forEach(y=>{
-            // console.log(data["batch_grades"][x][y]);
-            // We need to remove trainer ID and combine score * weight...somehow...
-            rowArr.push(associateData["batch_grades"][x][y])
-            batchArr.push(batchData["batch_grades"][x][y])
-        });
-        rowDict[i] = rowArr
-        batchDict[i] = batchArr
+    let rowArr = []
+    
+    for(let j = 0; j<Object.keys(associateData["data"]["Week #"]).length; j++){
+        
+        rowArr.push(associateData["data"]["Assessment Type"][j])
+        console.log(associateData["data"]["Assessment Type"][j])
+        rowArr.push("Week " + associateData["data"]["Week #"][j])
+        rowArr.push(associateData["data"]["My Score"][j])
+        rowArr.push(associateData["data"]["Batch Averages"][j])
+        rowDict[j] = rowArr
+        rowArr = []
         console.log(rowDict)
-    });
+    }
 
     // create a new row, and add the data to the row
     let tbody = document.getElementById("stat_table");
-    let datalen = Object.keys(rowDict).length;
-    console.log(datalen)
     
     Object.keys(rowDict).forEach(row=>{
         let tr = document.createElement('tr');
         let j = 0;
         var next_week = "";
+        console.log(Object.keys(rowDict).length)
         Object.keys(rowDict[row]).forEach(rowData=>{
             // This if makes it so we do not include the weight, or the trainer ID "resOfBatch"
-            if(rowData != 2 && rowData != 4){
-                if(rowData == 1){
-                    // This is the week data
-                    let td = document.createElement('td')
-                    td.textContent = "Week " + rowDict[row][3]
-                    tr.appendChild(td)
-                    // This is the score data
-                    td = document.createElement('td')
-                    td.textContent = rowDict[row][rowData]
-                    tr.appendChild(td)
-                }
-                // We need to eventually add the weights ... but this is based upon weeks ... 
-                else if(rowData == 3){
-                    
-                    if(datalen > Number(row)+1){
-                        next_week = "Week " + rowDict[Number(row) + 1][rowData];
-                    }
-                    
-                    
-                    let td = document.createElement('td')
-                    td.textContent = batchDict[row][1]
-                    tr.appendChild(td)
-                }
-                else{
-                    let td = document.createElement('td')
-                    td.textContent = rowDict[row][rowData]
-                    tr.appendChild(td)
-                }
+            let td = document.createElement('td')
+            if(rowData == 1 && Object.keys(rowDict).length>Number(row)+1){
+                next_week = rowDict[Number(row)+1][rowData]
             }
+            td = document.createElement('td')
+            td.textContent = rowDict[row][rowData]
+            tr.appendChild(td)
         });
         // Need to append the batch score to the tr
         tbody.appendChild(tr)
 
-        
+        console.log(qcData)
 		//QC   Week 1    Good   Average
 		let flag = false;
 		var qctr;
@@ -358,31 +699,31 @@ function build_statistics_table(associateData, batchData) {
 }
 
 
-function get_table(){
-	let port = 5000;
-	let host = "https://localhost";
-	let endpoint = "/test/"; //TODO select endpoint for associate dashboard data
-	let url = host + ':' + port + endpoint;
-	fetch(url, {
-		method: 'GET',
-		mode: 'cors',
-	}).then(response =>{
-		console.log('reply:')
-		console.log(response)
-		return response.json()
-	}).catch(err =>{
-		console.log('mistakes were made:')
-		console.log(err)
-	}).then(response_dict =>{
+// function get_table(){
+// 	let port = 5000;
+// 	let host = "https://localhost";
+// 	let endpoint = "/test/"; //TODO select endpoint for associate dashboard data
+// 	let url = host + ':' + port + endpoint;
+// 	fetch(url, {
+// 		method: 'GET',
+// 		mode: 'cors',
+// 	}).then(response =>{
+// 		console.log('reply:')
+// 		console.log(response)
+// 		return response.json()
+// 	}).catch(err =>{
+// 		console.log('mistakes were made:')
+// 		console.log(err)
+// 	}).then(response_dict =>{
 
-		console.log('final step:')
-		console.log(response_dict)
-		console.log(typeof(response_dict))
-		if (typeof(response_dict) != 'undefined'){
-			build_statistics_table(response_dict["data"]);
-		}
-	})
-}
+// 		console.log('final step:')
+// 		console.log(response_dict)
+// 		console.log(typeof(response_dict))
+// 		if (typeof(response_dict) != 'undefined'){
+// 			build_statistics_table(response_dict["data"]);
+// 		}
+// 	})
+// }
 
 const dummyData = { 'associate': [0, 10, 20, 30, 40, 50, 60 ,70, 80, 90], 'batch':[0, 10, 30, 20, 40, 60, 50], 'henry':[100, 100, 100, 100, 100, 100, 100, 100]};
 // function loadData() must be called after chart is declared in js file
@@ -469,19 +810,22 @@ dict = {};
 	};
 });
 
-async function get_big_spenders() {
-    let url = ""
-    if (cookie.includes("batchID")){
-        console.log(cookie.slice(cookie.search("batchID")))
-        url = "http://localhost:5000/grades/reports/" +cookie.slice(cookie.search("batchID"))+ "/spider";
-    }
-    else {
-        url = "http://localhost:5000/grades/reports/BatchID/spider"
-    }
-    
-	const response = await fetch(url);
-    let temp = await response.json();
-    console.log(ids);
+// async function get_batch_data() {
+//     let url = ""
+//     if (cookie.includes("batchID")){
+//         console.log(cookie.slice(cookie.search("batchID")))
+//         url = "http://localhost:5000/grades/reports/" +cookie.slice(cookie.search("batchID"))+ "/spider";
+//     }
+//     else {
+//         url = "http://localhost:5000/grades/reports/BatchID/spider"
+//     }
+// 	const response = await fetch(url);
+//     let ids = await response.json();
+//     console.log(ids);
+
+// }
+
+
 
 
 let temp = {
@@ -591,7 +935,7 @@ let batchData = {
 		"weight": 100.0
 	  }]
     }
-build_statistics_table(temp, batchData);
+// build_statistics_table(temp, batchData);
 
     
 
@@ -710,68 +1054,70 @@ let chartdata = {
 	}
   }
   loadData(chartdata)
+  function build_chart_data(email){
+    chartdata = get_chart_data(email)
+    let count = 0;
+    let associateweekly = []
+    let batchweekly = []
+    for(let i = 0; i<chartdata["chartData"]["Associate Exam Score"].length; i++){
+        let exam = chartdata["chartData"]["Associate Exam Score"][i]
+        if(exam != 0){
+            count++
+        }
+        let other = chartdata["chartData"]["Associate Other Score"][i]
+        if(other != 0){
+            count++
+        }
+        let presentation = chartdata["chartData"]["Associate Presentation Score"][i]
+        if(presentation != 0){
+            count++
+        }
+        let project = chartdata["chartData"]["Associate Project Score"][i]
+        if(project != 0){
+            count++
+        }
+        let verbal = chartdata["chartData"]["Associate Verbal Score"][i]
+        if(verbal != 0){
+            count++
+        }
+        if(count!=0){
+            associateweekly.push((exam+other+presentation+project+verbal)/count)
+        }
+        
+        count = 0;
+        
 
-let count = 0;
-let associateweekly = []
-let batchweekly = []
-for(let i = 0; i<chartdata["chartData"]["Associate Exam Score"].length; i++){
-    let exam = chartdata["chartData"]["Associate Exam Score"][i]
-    if(exam != 0){
-        count++
+        let batchexam = chartdata["chartData"]["Average Exam Score"][i]
+        if(batchexam != 0){
+            count++
+        }
+        let batchother = chartdata["chartData"]["Average Other Score"][i]
+        if(batchother != 0){
+            count++
+        }
+        let batchpresentation = chartdata["chartData"]["Average Presentation Score"][i]
+        if(batchpresentation != 0){
+            count++
+        }
+        let batchproject = chartdata["chartData"]["Average Project Score"][i]
+        if(batchproject != 0){
+            count++
+        }
+        let batchverbal = chartdata["chartData"]["Average Verbal Score"][i]
+        if(batchverbal != 0){
+            count++
+        }
+        if(count!=0){
+            batchweekly.push((batchexam+batchother+batchpresentation+batchproject+batchverbal)/count)
+        }
     }
-    let other = chartdata["chartData"]["Associate Other Score"][i]
-    if(other != 0){
-        count++
-    }
-    let presentation = chartdata["chartData"]["Associate Presentation Score"][i]
-    if(presentation != 0){
-        count++
-    }
-    let project = chartdata["chartData"]["Associate Project Score"][i]
-    if(project != 0){
-        count++
-    }
-    let verbal = chartdata["chartData"]["Associate Verbal Score"][i]
-    if(verbal != 0){
-        count++
-    }
-    if(count!=0){
-        associateweekly.push((exam+other+presentation+project+verbal)/count)
-    }
-    
-    count = 0;
-    
+    console.log(batchweekly)
 
-    let batchexam = chartdata["chartData"]["Average Exam Score"][i]
-    if(batchexam != 0){
-        count++
-    }
-    let batchother = chartdata["chartData"]["Average Other Score"][i]
-    if(batchother != 0){
-        count++
-    }
-    let batchpresentation = chartdata["chartData"]["Average Presentation Score"][i]
-    if(batchpresentation != 0){
-        count++
-    }
-    let batchproject = chartdata["chartData"]["Average Project Score"][i]
-    if(batchproject != 0){
-        count++
-    }
-    let batchverbal = chartdata["chartData"]["Average Verbal Score"][i]
-    if(batchverbal != 0){
-        count++
-    }
-    if(count!=0){
-        batchweekly.push((batchexam+batchother+batchpresentation+batchproject+batchverbal)/count)
-    }
+    console.log(associateweekly)
+
+    let chartstuff = {}
+    chartstuff["Associate"] = associateweekly
+    chartstuff["Batch"] = batchweekly
+
+    loadData(chartstuff)
 }
-console.log(batchweekly)
-
-console.log(associateweekly)
-
-let chartstuff = {}
-chartstuff["Associate"] = associateweekly
-chartstuff["Batch"] = batchweekly
-
-loadData(chartstuff)

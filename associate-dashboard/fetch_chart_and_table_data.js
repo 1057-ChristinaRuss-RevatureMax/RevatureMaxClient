@@ -13,6 +13,10 @@
 // This is the endpoint to get the batch data for the associate table batch average
 
 
+//http://localhost:5000/trainer/individual/grades/mock18.associate737560f9-bc2a-4bcb-b2b0-7413c333d623@mock.com
+// This is for the trainer dashboard table 
+
+
 
 function get_qc_data() {
     // let url = "Zach's QC endpoint";
@@ -84,7 +88,7 @@ function build_table(data){
 
 function get_table(){
 	let port = 5000;
-	let host = "https://localhost";
+	let host = "http://localhost:5000/grades/reports/";
 	let endpoint = "/test/"; //TODO select endpoint for associate dashboard data
 	let url = host + ':' + port + endpoint;
 	fetch(url, {

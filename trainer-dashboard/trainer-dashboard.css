@@ -19,6 +19,31 @@ secondary colors:
     
 }
 
+#associate-table-data {
+
+    display:block;
+    width: 100%;
+    overflow: auto;
+    max-height: 350px;
+      
+}
+
+#associate-table-head {
+    display: block;
+}
+
+#stat_table {
+
+    display:block;
+    width: 100%;
+    overflow: auto;
+    max-height: 350px;
+      
+}
+
+#stat-table-head tr {
+    display: block;
+}
 
 .btn-container button{
     /* background: red; */
@@ -112,7 +137,7 @@ canvas {
 body{
     min-height: 100vh;
     background: linear-gradient( white ,#F26925 );
-    background: no-repeat;
+    /* background: no-repeat; */
  }
 
 .glass{
