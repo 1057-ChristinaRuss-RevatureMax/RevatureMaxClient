@@ -689,11 +689,11 @@ const lineColor = ['#72A4C2', '#FCB414', '#F26925'];
 var ctx = document.getElementById('gradesChart').getContext('2d');
 
 
-
+var myChart;
 
 function loadData(dataList){
 
-    var myChart = new Chart(ctx, {
+    myChart = new Chart(ctx, {
         type: 'line',
         data:{
             labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 
