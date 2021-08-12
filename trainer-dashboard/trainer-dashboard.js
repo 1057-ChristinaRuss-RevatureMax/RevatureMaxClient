@@ -755,16 +755,20 @@ var myChart = new Chart(ctx, {
 
 function loadData(dataList){
     var i = 0;
+    console.log(dataList)
     for(label in dataList){
-        let setLabel = label; // ledgend label
-        let setData =  Object.values(dataList[label]);  // data to be graphed
-        let setColor = fillColor[i]; // color of this datas background
-        let setBorderColor = lineColor[i]; // color of ths datas trace
-        let parsedData = {label: setLabel, data: setData, backgroundColor: setColor, borderColor: setBorderColor, borderWidth: 1, hidden: false,};
-        
-        myChart.data.datasets.push(parsedData);
-        buildLegend(label, lineColor[i]);
-        i++;
+        if(label != "chartData"){
+            let setLabel = label; // ledgend label
+            let setData =  Object.values(dataList[label]);  // data to be graphed
+            let setColor = fillColor[i]; // color of this datas background
+            let setBorderColor = lineColor[i]; // color of ths datas trace
+            let parsedData = {label: setLabel, data: setData, backgroundColor: setColor, borderColor: setBorderColor, borderWidth: 1, hidden: false,};
+            
+            myChart.data.datasets.push(parsedData);
+            buildLegend(label, lineColor[i]);
+            i++;
+        }
+
     };
     myChart.update();
 }
